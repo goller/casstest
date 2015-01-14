@@ -3,6 +3,7 @@ import os
 from cassandra.io.libevreactor import LibevConnection
 from cassandra.cluster import Cluster
 
+
 seed = os.environ.get('SEED', '127.0.0.1')
 port = int(os.environ.get('PORT', '9042'))
 keyspace = os.environ.get('KEYSPACE', 'test')
@@ -17,7 +18,7 @@ def test_read(session, user_id, age):
         assert(row.user_id == user_id)
 
 
-if __name__ == '__main__':
+def main():
     print('Connecting to seed {0} on port {1}'.format(seed, port))
 
     cluster = Cluster([seed], port=port)
@@ -41,3 +42,7 @@ if __name__ == '__main__':
 
     delete_query = 'DELETE name, age, user_id FROM users'
     session.execute(delete_query)
+
+
+if __name__ == '__main__':
+    main()
