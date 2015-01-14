@@ -16,12 +16,11 @@ requirements = [
 ]
 
 test_requirements = [
-    'tox==1.8.1'
 ]
 
 setup(
     name='casstest',
-    version='0.3.0',
+    version='0.4.0',
     description='Just a quick dockerfile test for my entertainment',
     long_description=readme + '\n\n' + history,
     author='Chris Goller',
