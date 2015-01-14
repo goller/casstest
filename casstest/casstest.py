@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import uuid
 from cassandra.io.libevreactor import LibevConnection
 from cassandra.cluster import Cluster
 
