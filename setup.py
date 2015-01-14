@@ -12,16 +12,16 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 requirements = [
-    # TODO: put package requirements here
+    'cassandra-driver==2.1.3'
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    'tox==1.8.1'
 ]
 
 setup(
     name='casstest',
-    version='0.1.0',
+    version='0.2.0',
     description='Just a quick dockerfile test for my entertainment',
     long_description=readme + '\n\n' + history,
     author='Chris Goller',
