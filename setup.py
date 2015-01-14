@@ -32,6 +32,7 @@ setup(
     ],
     package_dir={'casstest':
                  'casstest'},
+    entry_points={'console_scripts': ['run-cass-test = casstest.casstest:main']},
     include_package_data=True,
     install_requires=requirements,
     license="BSD",
