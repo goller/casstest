@@ -12,7 +12,6 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 requirements = [
-    'cassandra-driver==2.1.3'
 ]
 
 test_requirements = [
