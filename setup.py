@@ -21,7 +21,7 @@ test_requirements = [
 
 setup(
     name='casstest',
-    version='0.5.0',
+    version='0.6.0',
     description='Just a quick dockerfile test for my entertainment',
     long_description=readme + '\n\n' + history,
     author='Chris Goller',
