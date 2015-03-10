@@ -13,7 +13,8 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 requirements = [
         'blist==1.3.6',
-        'cassandra-driver==2.1.3'
+        'cassandra-driver==2.1.3',
+        'docopt==0.6.2'
 ]
 
 test_requirements = [
