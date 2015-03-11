@@ -21,6 +21,7 @@ Options:
   --timeout=<secs>     Timeout seconds for queries before failure [default: 10.0]
 """
 from docopt import docopt
+import sys
 
 from cassandra.cluster import Cluster
 from cassandra.io.libevreactor import LibevConnection
@@ -70,7 +71,7 @@ def value(size):
     return bytearray(size)
 
 
-if __name__ == '__main__':
+def main():
     args = docopt(__doc__, version='1.0', options_first=True)
     servers = args['<servers>']
     port = int(args['--port'])
@@ -89,3 +90,8 @@ if __name__ == '__main__':
     for key in key_factory(num):
         cxn.insert(key, v, ttl)
     cxn.close()
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
