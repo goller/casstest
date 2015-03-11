@@ -20,4 +20,4 @@ Just a quick dockerfile test for my entertainment
 Features
 --------
 
-* TODO
+* stresstest
