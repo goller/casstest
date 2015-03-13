@@ -4,7 +4,7 @@
 Cassandra Stress Test
 
 Usage:
-  stresstest [--port=<number>] [--keyspace=<name>] [--keys=<num>] [--size=<bytes>] [--ttl=<secs>] [--replication=<num>] [--timeout=<secs>] <servers>...
+  stresstest [--username=<name>] [--passwd=<passwd>] [--port=<number>] [--keyspace=<name>] [--keys=<num>] [--size=<bytes>] [--ttl=<secs>] [--replication=<num>] [--timeout=<secs>] <servers>...
   stresstest -h | --help
   stresstest -v | --version
 
@@ -12,6 +12,8 @@ Options:
   -h --help            Show this screen.
   -v --version         Show version.
   <servers>            Cassandra Server IP addresses
+  -u --username        Username for authentication [default: None]
+  -p --passwd          Password for authentication [default: None]
   --port=<number>      Cassandra port [default: 9042]
   --keyspace=<name>    Keyspace name [default: test]
   --keys=<num>         Number of keys to insert into keyspace [default: 100]
@@ -24,13 +26,18 @@ from docopt import docopt
 import sys
 
 from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
 from cassandra.io.libevreactor import LibevConnection
 from cassandra.protocol import ConfigurationException
 
 
 class Connection(object):
-    def __init__(self, servers, port, keyspace, replication, timeout):
-        self.cluster = Cluster(servers, port=port)
+    def __init__(self, servers, port, username, passwd, keyspace, replication, timeout):
+        connect_kwargs = {}
+        if username and passwd:
+            auth = PlainTextAuthProvider(username=username, password=passwd)
+            connect_kwargs['auth_provider'] = auth
+        self.cluster = Cluster(servers, port=port, **connect_kwargs)
         self.cluster.connection_class = LibevConnection
         self.session = self.cluster.connect()
         self.timeout = timeout
@@ -82,10 +89,17 @@ def main():
         ttl = float(args['--ttl'])
     except ValueError:
         ttl = None
+
+    username = args['--username']
+    username =  None if username == 'None' else username
+
+    passwd = args['--passwd']
+    passwd =  None if passwd == 'None' else passwd
+
     replication = int(args['--replication'])
     timeout = float(args['--timeout'])
 
-    cxn = Connection(servers, port, keyspace, replication, timeout)
+    cxn = Connection(servers, port, username, passwd, keyspace, replication, timeout)
     v = value(size)
     for key in key_factory(keys):
         cxn.insert(key, v, ttl)
