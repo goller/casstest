@@ -39,7 +39,7 @@ class Connection(object):
 
     def create_keyspace(self, keyspace, replication):
         query = "CREATE KEYSPACE %s WITH replication = {'class':'SimpleStrategy', 'replication_factor': %s};" % (keyspace, replication)
-        self.session.execute(create_keyspace_query, timeout=self.timeout)
+        self.session.execute(query, timeout=self.timeout)
         self.session.set_keyspace(keyspace)
 
     def create_table(self, ):
@@ -87,7 +87,7 @@ def main():
 
     cxn = Connection(servers, port, keyspace, replication, timeout)
     v = value(size)
-    for key in key_factory(num):
+    for key in key_factory(keys):
         cxn.insert(key, v, ttl)
     cxn.close()
     return 0
