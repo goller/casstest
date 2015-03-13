@@ -12,8 +12,8 @@ Options:
   -h --help            Show this screen.
   -v --version         Show version.
   <servers>            Cassandra Server IP addresses
-  -u --username        Username for authentication [default: None]
-  -p --passwd          Password for authentication [default: None]
+  --username=<name>    Username for authentication [default: None]
+  --passwd=<passwd>    Password for authentication [default: None]
   --port=<number>      Cassandra port [default: 9042]
   --keyspace=<name>    Keyspace name [default: test]
   --keys=<num>         Number of keys to insert into keyspace [default: 100]
