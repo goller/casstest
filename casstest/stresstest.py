@@ -38,7 +38,7 @@ class Connection(object):
         self.create_table()
 
     def create_keyspace(self, keyspace, replication):
-        query = "CREATE KEYSPACE {0} WITH replication = {'class':'SimpleStrategy', 'replication_factor': {1}};".format(keyspace, replication)
+        query = "CREATE KEYSPACE %s WITH replication = {'class':'SimpleStrategy', 'replication_factor': %s};" % (keyspace, replication)
         self.session.execute(create_keyspace_query, timeout=self.timeout)
         self.session.set_keyspace(keyspace)
 
