@@ -52,7 +52,7 @@ class Connection(object):
     def create_table(self, ):
         self.session.execute("""CREATE TABLE stresstest (
                                 id int PRIMARY KEY,
-                                value text
+                                value blob
                                 );""",
                                 timeout=self.timeout)
 
