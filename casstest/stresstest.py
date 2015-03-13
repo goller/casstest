@@ -56,7 +56,7 @@ class Connection(object):
                                 );""",
                                 timeout=self.timeout)
 
-    def insert(key, value, ttl=None):
+    def insert(self, key, value, ttl=None):
         create_query = """INSERT INTO stresstest (id, value)
                           VALUES (%s, %s)
                        """
