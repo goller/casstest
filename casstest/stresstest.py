@@ -86,7 +86,7 @@ def main():
     keys = int(args['--keys'])
     size = int(args['--size'])
     try:
-        ttl = float(args['--ttl'])
+        ttl = int(args['--ttl'])
     except ValueError:
         ttl = None
 
